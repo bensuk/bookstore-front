@@ -1,13 +1,32 @@
 import React, {useState} from "react";
+import axios from "axios";
+import {variables} from "./Variables";
 import "./Login.css";
+import { redirect, useNavigate } from "react-router-dom";
+import {BrowserRouter, Route, Routes, NavLink} from 'react-router-dom';
 
 export default function Login(){
     const [UserName, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
+    const navigate = useNavigate();
+
     function handleSubmit(e){
         e.preventDefault();
-    }    
+        login(UserName, password);
+    }
+
+    async function login(name, pasw){
+        axios.post(variables.API_URL + 'login', {
+            userName: name,
+            password: pasw
+        }).then((response) => {
+            if (response.data.accessToken){
+                localStorage.setItem("user", JSON.stringify(response.data.accessToken));
+                navigate(-1);
+            }
+        }).catch(error => alert(error.response.data));
+    }
     
     return(
     <div className="Login">
