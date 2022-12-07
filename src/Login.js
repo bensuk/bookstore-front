@@ -2,13 +2,11 @@ import React, {useState} from "react";
 import axios from "axios";
 import {variables} from "./Variables";
 import "./Login.css";
-import { redirect, useNavigate } from "react-router-dom";
-import {BrowserRouter, Route, Routes, NavLink} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-export default function Login(){
+export default function Login(props){
     const [UserName, setUserName] = useState("");
     const [password, setPassword] = useState("");
-
     const navigate = useNavigate();
 
     function handleSubmit(e){
@@ -23,7 +21,8 @@ export default function Login(){
         }).then((response) => {
             if (response.data.accessToken){
                 localStorage.setItem("user", JSON.stringify(response.data.accessToken));
-                navigate(-1);
+                props.loggedState(true);
+                navigate('/');
             }
         }).catch(error => alert(error.response.data));
     }

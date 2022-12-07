@@ -1,17 +1,44 @@
+import axios from "axios";
 import React, {useState} from "react";
+import {variables} from "./Variables";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
-export default function Login(){
+export default function SignUp(){
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [signedSuccessfully, setSignedSuccessfully] = useState(false);
+
+    const navigate = useNavigate();
 
     function handleSubmit(e){
         e.preventDefault();
-    }    
+        SignUp(username, email, password);
+    }
+
+    async function SignUp(name, email, pasw){
+        axios.post(variables.API_URL + 'register', {
+            userName: name,
+            email: email,
+            password: pasw
+        }).then(response => {
+            if (response.status === 201){
+                setSignedSuccessfully(true);
+            }
+        }).catch(error => {
+            alert(error.response.data);
+        })
+    }
     
     return(
     <div className="Login">
+        
+        {signedSuccessfully && (
+            <div className="alert alert-success" role="alert">
+                Signed up successfully
+            </div>)}
+
         <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="UserName">Username</label>
@@ -31,7 +58,7 @@ export default function Login(){
                 value={password} 
                 onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            <button type="submit" className="btn btn-block btn-primary">Login</button>
+            <button type="submit" className="btn btn-block btn-primary">Sign up</button>
         </form>
     </div>
         )
