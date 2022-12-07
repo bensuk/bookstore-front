@@ -14,13 +14,13 @@ export default function Login(props){
         login(UserName, password);
     }
 
-    async function login(name, pasw){
+    function login(name, pasw){
         axios.post(variables.API_URL + 'login', {
             userName: name,
             password: pasw
         }).then((response) => {
             if (response.data.accessToken){
-                localStorage.setItem("user", JSON.stringify(response.data.accessToken));
+                localStorage.setItem("user", response.data.accessToken);
                 props.loggedState(true);
                 navigate('/');
             }

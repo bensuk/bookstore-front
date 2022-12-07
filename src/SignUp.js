@@ -2,7 +2,6 @@ import axios from "axios";
 import React, {useState} from "react";
 import {variables} from "./Variables";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
 
 export default function SignUp(){
     const [username, setUsername] = useState("");
@@ -10,14 +9,12 @@ export default function SignUp(){
     const [password, setPassword] = useState("");
     const [signedSuccessfully, setSignedSuccessfully] = useState(false);
 
-    const navigate = useNavigate();
-
     function handleSubmit(e){
         e.preventDefault();
         SignUp(username, email, password);
     }
 
-    async function SignUp(name, email, pasw){
+    function SignUp(name, email, pasw){
         axios.post(variables.API_URL + 'register', {
             userName: name,
             email: email,
