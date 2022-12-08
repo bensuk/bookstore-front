@@ -2,7 +2,7 @@ import {Home} from './Home';
 import Publisher from './Publisher';
 import Author from './Author';
 import Book from './Book';
-import {BrowserRouter, Route, Routes, NavLink} from 'react-router-dom';
+import {Route, Routes, NavLink} from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Login from './Login';
 import SignUp from './SignUp';

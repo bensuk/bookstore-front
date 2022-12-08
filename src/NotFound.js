@@ -3,9 +3,9 @@ import React, {Component} from "react";
 export class NotFound extends Component{
     render(){
         return(
-            <div>
-                <h3>Page not found</h3>
-            </div>
+        <h3 className='d-flex justify-content-center m-3'>
+            Page not found
+        </h3>
         )
     }
 }

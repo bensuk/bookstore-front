@@ -1,12 +1,5 @@
-import {Home} from './Home';
-import Publisher from './Publisher';
-import Author from './Author';
-import Book from './Book';
-import {BrowserRouter, Route, Routes, NavLink, Link} from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
-import Login from './Login';
-import SignUp from './SignUp';
-import {NotFound} from './NotFound';
+import {Link} from 'react-router-dom';
+import React from 'react';
 
 function Footer() {
     return (

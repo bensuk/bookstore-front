@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, {useEffect, useRef, useState} from "react";
-import { Link, redirect, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { variables } from "./Variables";
 
 export default function Author(props){
@@ -29,9 +29,9 @@ export default function Author(props){
             // }
             setAuthors(response.data);
         })
-        .catch(error => {
+        .catch(() => {
             return navigate("/NotFound"); 
-            alert(error.response.statusText);                        
+            // alert(error.response.statusText);                        
         });
     }
 

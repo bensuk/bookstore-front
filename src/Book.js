@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, {useEffect, useRef, useState} from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { variables } from "./Variables";
 
 export default function Book(props){
@@ -29,9 +29,9 @@ export default function Book(props){
             // }
             setBooks(response.data);
         })
-        .catch(error => {
+        .catch(() => {
             return navigate("/NotFound"); 
-            alert(error.response.statusText);                        
+            // alert(error.response.statusText);                        
         });
     }
 
