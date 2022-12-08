@@ -1,10 +1,7 @@
 import axios from "axios";
-import React, {Component, useEffect, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import { Link } from "react-router-dom";
 import { variables } from "./Variables";
-import {withRouter} from './withRouter';
-import { Navigate } from "react-router-dom";
-
 
 export default function Publisher(props){
     const [publishers, setPublishers] = useState([]);
@@ -14,8 +11,7 @@ export default function Publisher(props){
     const [publisherFouned, setPublisherFouned] = useState("");
     const [publisherNotActiveSince, setPublisherNotActiveSince] = useState("");
     const [editPublisherId, setEditPublisherId] = useState("");
-
-    const navigate = useNavigate();
+    const [publisherInfo, setPublisherInfo] = useState("");
 
     useEffect(() =>{
         getList();
@@ -25,10 +21,6 @@ export default function Publisher(props){
         axios.get(variables.API_URL + "publishers")
         .then(response => setPublishers(response.data))
         .catch(error => alert(error.response.data));
-    }
-
-    function tableClickHandle(id) {
-        navigate("/Authors/" + id);
     }
 
     function addClickHandle(){
@@ -89,6 +81,21 @@ export default function Publisher(props){
             }).catch(error => alert(error.response.statusText));
         }
     }
+
+    function infoClickHandle(id){
+        const result = publishers.find(obj => {
+            return obj.id === id;
+        });
+
+        setPublisherInfo(<div>
+                            <b>Id: </b>{result.id}<br/>
+                            <b>Name: </b>{result.name}<br/>
+                            <b>Origin country: </b>{result.country}<br/>
+                            <b>Founded: </b>{result.founded}<br/>
+                            <b>Is still active: </b>{String(result.isActive)}<br/>
+                            <b>Not active since: </b>{String(result.nonActiveSince)}<br/>
+                            </div>);
+    }
     
     return(
     <div>
@@ -108,6 +115,7 @@ export default function Publisher(props){
                     <th>Country</th>
                     <th>Founded</th>
                     <th>Options</th>
+                    <th>Authors</th>
                 </tr>
             </thead>
             <tbody>
@@ -123,7 +131,9 @@ export default function Publisher(props){
                     </td>
                     <td>
                         <button type="button" className="btn btn-light mr-1"
-                        onClick={() => tableClickHandle(x.id)}>
+                        data-bs-toggle="modal" 
+                        data-bs-target="#PublisherInfoModal"
+                        onClick={() => infoClickHandle(x.id)}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-info-square" viewBox="0 0 16 16">
                                 <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                                 <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
@@ -149,6 +159,13 @@ export default function Publisher(props){
                             <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                             </svg>
                         </button></React.Fragment>)}
+                    </td>
+                    <td>
+                        <Link className="btn btn-light mr-1" to={`/publishers/${x.id}/authors`}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots" viewBox="0 0 16 16">
+                                <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                            </svg>
+                        </Link>
                     </td>
                 </tr>)}
             </tbody>
@@ -206,6 +223,26 @@ export default function Publisher(props){
                 </div>
             </div>
         </div>
+        
+        <div className="modal fade" id="PublisherInfoModal" tabIndex="-1" role="dialog" aria-labelledby="PublisherInfoModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="PublisherInfoModalLabel">Publisher information</h5>
+                        <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        {publisherInfo}
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
         )
     }
