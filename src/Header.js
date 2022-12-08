@@ -1,7 +1,7 @@
 import {Home} from './Home';
 import Publisher from './Publisher';
 import Author from './Author';
-import {Book} from './Book';
+import Book from './Book';
 import {BrowserRouter, Route, Routes, NavLink} from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Login from './Login';
@@ -35,17 +35,7 @@ function Header() {
             </li>
             <li className='nav-item m-1'>
                 <NavLink className="btn btn-light btn-outline-primary" to="/publishers">
-                    Publisher
-                </NavLink>
-            </li>
-            <li className='nav-item m-1'>
-                <NavLink className="btn btn-light btn-outline-primary" to="/authors">
-                    Author
-                </NavLink>
-            </li>
-            <li className='nav-item m-1'>
-                <NavLink className="btn btn-light btn-outline-primary" to="/books">
-                    Book
+                    Publishers
                 </NavLink>
             </li>
         </ul>
@@ -76,8 +66,6 @@ function Header() {
         <Route path='Publishers' element={<Publisher isUserLogged = {isLogged} />}/>
         <Route path='Publishers/:publisherId/Authors' element={< Author isUserLogged = {isLogged} />}/>
         <Route path='Publishers/:publisherId/Authors/:authorId/Books' element={< Book isUserLogged = {isLogged} />}/>
-        <Route path='Authors' element={<Author/>}/>
-        <Route path='Books' element={<Book/>}/>
         <Route path='Login' element={<Login loggedState = {setLogged}/>}/>
         <Route path='SignUp' element={<SignUp/>}/>
         <Route path='NotFound' element={<NotFound/>}/>
