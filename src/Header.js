@@ -27,38 +27,43 @@ function Header() {
     return (
     <div className="App container" style={{minHeight: 80 + 'vh'}}>
     <nav className='navbar navbar-expand-sm bg-light navbar-light'>
-        <ul className='navbar-nav'>
-            <li className='nav-item m-1'>
-                <NavLink className="btn btn-light btn-outline-primary" to="/">
-                    Home
-                </NavLink>
-            </li>
-            <li className='nav-item m-1'>
-                <NavLink className="btn btn-light btn-outline-primary" to="/publishers">
-                    Publishers
-                </NavLink>
-            </li>
-        </ul>
-        {isLogged ? (
-        <ul className='navbar-nav ml-auto'>
-            <li className='nav-item m-1'>
-                <button className="btn btn-light btn-outline-primary" onClick={logOut}>
-                    Log out
-                </button>
-            </li>
-        </ul>) : (
-        <ul className='navbar-nav ml-auto'>
-            <li className='nav-item m-1'>
-                <NavLink className="btn btn-light btn-outline-primary" to="/Login">
-                    Login
-                </NavLink>
-            </li>
-            <li className='nav-item m-1'>
-                <NavLink className="btn btn-light btn-outline-primary" to="/SignUp">
-                    Sign Up
-                </NavLink>
-            </li>
-        </ul>)}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul className='navbar-nav'>
+                <li className='nav-item m-1'>
+                    <NavLink className="btn btn-light btn-outline-primary" to="/">
+                        Home
+                    </NavLink>
+                </li>
+                <li className='nav-item m-1'>
+                    <NavLink className="btn btn-light btn-outline-primary" to="/publishers">
+                        Publishers
+                    </NavLink>
+                </li>
+            </ul>
+            {isLogged ? (
+            <ul className='navbar-nav ml-auto'>
+                <li className='nav-item m-1'>
+                    <button className="btn btn-light btn-outline-primary" onClick={logOut}>
+                        Log out
+                    </button>
+                </li>
+            </ul>) : (
+            <ul className='navbar-nav ml-auto'>
+                <li className='nav-item m-1'>
+                    <NavLink className="btn btn-light btn-outline-primary" to="/Login">
+                        Login
+                    </NavLink>
+                </li>
+                <li className='nav-item m-1'>
+                    <NavLink className="btn btn-light btn-outline-primary" to="/SignUp">
+                        Sign Up
+                    </NavLink>
+                </li>
+            </ul>)}
+        </div>
     </nav>
     
     <Routes>
