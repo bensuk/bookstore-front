@@ -25,7 +25,7 @@ function Header() {
     }
 
     return (
-    <BrowserRouter>
+    <div className="App container" style={{minHeight: 80 + 'vh'}}>
     <nav className='navbar navbar-expand-sm bg-light navbar-light'>
         <ul className='navbar-nav'>
             <li className='nav-item m-1'>
@@ -71,8 +71,7 @@ function Header() {
         <Route path='NotFound' element={<NotFound/>}/>
         <Route path='*' element={<NotFound/>}/>
     </Routes>
-        
-    </BrowserRouter>
+    </div>
   );
 }
 
