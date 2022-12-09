@@ -25,7 +25,7 @@ function Header() {
     }
 
     return (
-    <div className="App container" style={{minHeight: 80 + 'vh'}}>
+    <div className="App container" style={{minHeight: 75 + 'vh'}}>
     <nav className='navbar navbar-expand-sm bg-light navbar-light'>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

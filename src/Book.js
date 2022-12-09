@@ -195,7 +195,7 @@ export default function Book(props){
                             </div>
                             <div className="form-group">
                                 <label htmlFor="bookDescription" className="col-form-label">Description</label>
-                                <input type="text" className="form-control" id="bookDescription" required
+                                <textarea className="form-control" id="bookDescription" required
                                 value={bookDescription}
                                 onChange={(e) => setBookDescription(e.target.value)}/>
                             </div>
@@ -204,7 +204,7 @@ export default function Book(props){
                             <form>
                             <div className="form-group">
                             <label htmlFor="bookDescription" className="col-form-label">Description</label>
-                                <input type="text" className="form-control" id="bookDescription" required
+                                <textarea className="form-control" id="bookDescription" required
                                 value={bookDescription}
                                 onChange={(e) => setBookDescription(e.target.value)}/>
                             </div>
